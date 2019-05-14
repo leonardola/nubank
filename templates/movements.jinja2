@@ -10,6 +10,7 @@
         <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
         <script src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/movements.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/typeahead.jquery.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/Chart.bundle.min.js') }}"></script>
         <div class="contentWrapper">
             <div class="monthsWrapper">
@@ -80,10 +81,15 @@
 
         <div id="addTagBox">
             <div class="tagList">
-                <div class="tag">asdf<i class="fas fa-trash-alt"></i></div>
+                <div class="tag">Carro<i class="fas fa-trash-alt"></i></div>
+                <div class="tag">Casa<i class="fas fa-trash-alt"></i></div>
+                <i class="fas fa-plus-circle"></i>
+                <div class="addTag" hidden>
+                    <input>
+                </div>
+
             </div>
-            <input>
-            <button>Salvar</button>
+
         </div>
     </body>
 </html>
