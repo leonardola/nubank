@@ -2,6 +2,7 @@ from flask import Flask, request, jsonify
 from flask import render_template
 from Entity.Movement import Movement
 from Entity.Category import Category
+from Entity.Movement_has_Category import Movement_has_Category
 import datetime
 from dateutil.relativedelta import relativedelta
 import pandas as pd
@@ -73,8 +74,8 @@ def getMonthsList():
     return months
 
 
-@app.route("/addTag", methods=['POST'])
-def addCategory():
+@app.route("/addTag/<movement_id>", methods=['POST'])
+def addCategory(movement_id):
     name = request.form['name']
     try:
         category = Category.get(name=name)
@@ -82,8 +83,10 @@ def addCategory():
         category = Category.create(name=name)
         category.save()
 
+    movement = Movement.get(id=movement_id)
+    Movement_has_Category.create(movement=movement, category=category).save()
+
     return jsonify({'id': category.id})
-    # movement = Movement.get(id=movement_id)
 
 
 @app.route("/getTags")

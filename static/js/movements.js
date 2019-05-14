@@ -70,59 +70,6 @@ $(document).ready(function () {
         });
     });
 
-    $("#addTagBox .fa-plus-circle").click(function () {
-        $(this).hide();
-        $(".addTag").show();
-        $(".addTag input").focus();
-    });
 
-    $(".addTag input").change(function () {
-        var newTagName = $(this).val();
-        var that = $(this);
-        $.post("/addTag", {name: newTagName}, function (data) {
-            that.val("");
-            that.parent().hide();
-            $("#addTagBox .fa-plus-circle").show();
-
-            var newTagHtml = "<div tag_id=\"" + data.id + "\" class=\"tag\">" + newTagName + "<i class=\"fas fa-trash-alt\"></i></div>";
-            $(newTagHtml).insertBefore("#addTagBox .fa-plus-circle");
-        }).fail(function () {
-            alert("Erro ao salvar tag");
-        });
-
-    });
-
-    var substringMatcher = function (strs) {
-        return function findMatches(q, cb) {
-            var matches, substringRegex;
-
-            // an array that will be populated with substring matches
-            matches = [];
-
-            // regex used to determine if a string contains the substring `q`
-            substrRegex = new RegExp(q, 'i');
-
-            // iterate through the pool of strings and for any string that
-            // contains the substring `q`, add it to the `matches` array
-            $.each(strs, function (i, str) {
-                if (substrRegex.test(str)) {
-                    matches.push(str);
-                }
-            });
-
-            cb(matches);
-        };
-    };
-
-    $('.addTag input').typeahead({
-            hint: true,
-            highlight: true,
-            minLength: 1
-        },
-        {
-            name: 'states',
-            source: substringMatcher(['asdf', 'abc'])
-        }
-    );
 
 });
