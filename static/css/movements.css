@@ -1,0 +1,134 @@
+html {
+    background: #861cb9;
+}
+
+table {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 1em;
+    line-height: 1.6em;
+    text-align: center;
+    width: 100%;
+}
+
+.date {
+    width: 150px;
+}
+
+table tr:nth-child(even) {
+    background: #8606b9;
+}
+
+table tr:nth-child(odd) {
+    background: #c28bd8;
+}
+
+tr {
+    height: 30px;
+}
+
+.monthButton {
+    background: #9531c5;
+    color: #ffff;
+    height: 78px;
+    width: 85px;
+    border-radius: 3px;
+    font-size: 0.9em;
+    border: none;
+}
+
+.monthsWrapper {
+    display: flex;
+    justify-content: space-evenly;
+    margin-bottom: 10px;
+}
+
+.contentWrapper {
+    margin-left: 30%;
+    margin-right: 30%;
+}
+
+.slick-slider .slick-list {
+    height: 82px;
+}
+
+.hideMovement {
+    background: none;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+.tags {
+    background: none;
+    color: white;
+    border: none;
+    border-radius: 2px;
+    font-weight: 600;
+}
+
+.nameInput {
+    background: none;
+    border: none;
+    color: white;
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.8em;
+    width: 100%;
+}
+
+.fas.fa-caret-down {
+    color: red;
+    font-size: 25px;
+}
+
+.fas.fa-caret-up {
+    color: #32CD32;
+    font-size: 25px;
+}
+
+td:nth-child(1) {
+    width: 5%;
+}
+
+canvas {
+    background: white;
+}
+
+#addTagBox {
+    height: 200px;
+    width: 500px;
+    border-radius: 3px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background: #861cb9;
+}
+
+.tagList {
+    background: white;
+    width: 80%;
+    height: 55px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    top: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-left: 10px;
+    padding-right: 10px;
+
+}
+
+.tag {
+    font-family: 'Roboto', sans-serif;
+    border: 2px solid #8fcc29;
+    border-radius: 3px;
+    padding: 8px;
+}
+
+.tag i {
+    margin-left: 10px;
+}

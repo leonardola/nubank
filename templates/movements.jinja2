@@ -1,0 +1,89 @@
+<html>
+    <head>
+        <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/movements.css') }}">
+        <link rel=stylesheet type=text/css href="{{ url_for('static', filename='css/slick.css') }}">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css" integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+    </head>
+
+    <body>
+        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/movements.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/Chart.bundle.min.js') }}"></script>
+        <div class="contentWrapper">
+            <div class="monthsWrapper">
+                {% for month in months %}
+                    <a href="/{{ month.split("$")[1] }}"><button class="monthButton">{{ month.split("$")[0] }}</button></a>
+                {% endfor %}
+            </div>
+            <label>Filtro</label>
+            <input class="filter">
+            <table cellspacing="0" cellpadding="0" class="movementsList">
+                <tr>
+                    <th></th>
+                    <th>Data</th>
+                    <th>Nome</th>
+                    <th>Valor</th>
+                    <th></th>
+                </tr>
+
+                {% for movement in movements %}
+                    {% if movement.status == 'SHOW' %}
+                        <tr>
+                            <td hash="{{ movement.hash }}">
+                                {% if movement.type == 'OUTCOME' %}
+                                    <i class="fas fa-caret-down"></i>
+                                {% else %}
+                                    <i class="fas fa-caret-up"></i>
+                                {% endif %}
+                            </td>
+                            <td>
+                                <p>{{ movement.date }}</p>
+                            </td>
+                            <td>
+                                {% if movement.edited_name %}
+                                    <input class="nameInput" movement_id="{{ movement.id }}" value="{{ movement.edited_name }}"/>
+                                {% else %}
+                                    <input class="nameInput" movement_id="{{ movement.id }}" value="{{ movement.original_name }}"/>
+                                {% endif %}
+                            </td>
+                            <td>
+                                {% if movement.type == 'OUTCOME' %}
+                                    <p class="value" value="-{{ movement.value }}">R$ - {{ movement.value }}</p>
+
+                                {% else %}
+                                    <p class="value" value="{{ movement.value }}">R$ {{ movement.value }}</p>
+                                {% endif %}
+                            </td>
+
+                            <td>
+                                <button class="hideMovement" movement_id="{{ movement.id }}"><i class="fas fa-trash-alt"></i></button>
+                                <button class="tags" movement_id="{{ movement.id }}"><i class="fas fa-tags"></i></button>
+                            </td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td>Balanço</td>
+                    <td></td>
+                    <td class="totalValue">R$ {{ total }}</td>
+                    <td></td>
+                </tr>
+
+            </table>
+            <div>
+                <canvas id="myChart" height="200" income="{{ totalIncome }}" outcome="{{ totalOutcome }}"></canvas>
+            </div>
+        </div>
+
+        <div id="addTagBox">
+            <div class="tagList">
+                <div class="tag">asdf<i class="fas fa-trash-alt"></i></div>
+            </div>
+            <input>
+            <button>Salvar</button>
+        </div>
+    </body>
+</html>
