@@ -89,6 +89,18 @@ def addCategory(movement_id):
     return jsonify({'id': category.id})
 
 
+@app.route("/getTags/<movement_id>")
+def getMovmentTags(movement_id):
+    tags = Category.select().join(Movement_has_Category).join(Movement).where(Movement.id == movement_id)
+
+    # tags = Category.select().where(Movement.id==movement_id).execute()
+    tags_list = []
+    for tag in tags:
+        tags_list.append({"id": tag.id, "name": tag.name})
+
+    return jsonify(tags_list)
+
+
 @app.route("/getTags")
 def getTags():
     tags = Category.select().execute()
@@ -97,6 +109,14 @@ def getTags():
         tags_list.append(tag.name)
 
     return jsonify(tags_list)
+
+
+@app.route("/removeMovementTag/<movement_id>/<tag_id>", methods=['POST', 'GET'])
+def removeMovementTag(movement_id, tag_id):
+    Movement_has_Category.delete().where(
+        (Movement_has_Category.movement == movement_id) & (Movement_has_Category.category == tag_id)).execute()
+
+    return "ok"
 
 
 app.run(debug=True)

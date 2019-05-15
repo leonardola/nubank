@@ -67,7 +67,35 @@ $(document).ready(function () {
     $(".tags").click(function (event) {
         event.stopPropagation();
         $("#addTagBox").show();
-        $("#addTagBox").attr("movement_id", $(this).attr("movement_id"));
+        var movementId = $(this).attr("movement_id");
+        $("#addTagBox").attr("movement_id", movementId);
+        $(".tag").remove();
+
+        var tagHtml = "";
+        $.get("/getTags/" + movementId, function (data) {
+            for (var i in data) {
+                if (!data.hasOwnProperty(i)) {
+                    continue;
+                }
+                tagHtml += "<div tag_id=\"" + data[i].id + "\" class=\"tag\">" + data[i].name + "<i class=\"fas fa-trash-alt\"></i></div>";
+            }
+
+            $(tagHtml).insertBefore(".fa-plus-circle")
+        }).fail(function () {
+            alert("Erro ao pegar tags");
+        })
+
+    });
+
+    $("#addTagBox").on("click", ".fa-trash-alt", function () {
+        var movementId = $("#addTagBox").attr("movement_id");
+        var tagId = $(this).parent().attr("tag_id");
+        var that = $(this);
+        $.post("/removeMovementTag/" + movementId + "/" + tagId, function () {
+            that.parent().remove();
+        }).fail(function () {
+            alert("falha ao remover tag");
+        })
     });
 
     $(document).click(function () {
