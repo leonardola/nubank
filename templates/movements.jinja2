@@ -7,13 +7,23 @@
     </head>
 
     <body>
-        <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/slick.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/vendor/jquery.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/vendor/slick.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/vendor/typeahead.jquery.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/vendor/Chart.bundle.min.js') }}"></script>
         <script src="{{ url_for('static', filename='js/movements.js') }}"></script>
         <script src="{{ url_for('static', filename='js/tags.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/typeahead.jquery.min.js') }}"></script>
-        <script src="{{ url_for('static', filename='js/Chart.bundle.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/sync.js') }}"></script>
+
+
+
+
+        <div id="qrCodeBox" hidden>
+            <img id="qrCode" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7">
+            <button>Sincronizar</button>
+        </div>
         <div class="contentWrapper">
+            <button id="generateQrCode">Iniciar Sincronização</button>
             <div class="monthsWrapper">
                 {% for month in months %}
                     <a href="/{{ month.split("$")[1] }}"><button class="monthButton">{{ month.split("$")[0] }}</button></a>

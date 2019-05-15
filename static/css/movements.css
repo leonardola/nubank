@@ -1,3 +1,6 @@
+* {
+    font-family: 'Roboto', sans-serif;
+}
 html {
     background: #861cb9;
 }
@@ -133,7 +136,9 @@ canvas {
     margin-left: 10px;
 }
 
-.tagList div input:focus {
+.tagList div input:focus,
+.filter:focus
+{
     outline: none;
 }
 
@@ -158,4 +163,59 @@ canvas {
 }
 .tt-suggestion.tt-selectable{
     margin: 10px;
+}
+
+#qrCodeBox img{
+    z-index: 101;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    position: fixed;
+}
+
+#qrCodeBox{
+    z-index: 100;
+    height: 100%;
+    width: 100%;
+    border-radius: 3px;
+    background: #861cb9;
+    position: fixed;
+}
+
+#generateQrCode{
+    z-index: 1;
+}
+
+#qrCodeBox button{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translate(-50%);
+    height: 80px;
+    width: 100px;
+    border: none;
+    border-radius: 3px;
+}
+
+#generateQrCode{
+    font-family: 'Roboto', sans-serif;
+    font-size: 16px;
+    height: 80px;
+    width: 200px;
+    border: none;
+    border-radius: 3px;
+    margin-left: 50%;
+    transform: translate(-50%);
+    margin-bottom: 20px;
+}
+
+.filter{
+    padding: 10px;
+    margin-bottom: 10px;
+}
+
+label{
+    color: white;
 }

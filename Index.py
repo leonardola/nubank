@@ -1,3 +1,4 @@
+#!/usr/bin/env python3
 from flask import Flask, request, jsonify
 from flask import render_template
 from Entity.Movement import Movement
@@ -6,6 +7,7 @@ from Entity.Movement_has_Category import Movement_has_Category
 import datetime
 from dateutil.relativedelta import relativedelta
 import pandas as pd
+from pynubank.nubank import Nubank
 
 app = Flask(__name__)
 
@@ -111,12 +113,22 @@ def getTags():
     return jsonify(tags_list)
 
 
-@app.route("/removeMovementTag/<movement_id>/<tag_id>", methods=['POST', 'GET'])
+@app.route("/removeMovementTag/<movement_id>/<tag_id>", methods=['POST'])
 def removeMovementTag(movement_id, tag_id):
     Movement_has_Category.delete().where(
         (Movement_has_Category.movement == movement_id) & (Movement_has_Category.category == tag_id)).execute()
 
     return "ok"
+
+
+@app.route("/generateQRCode", methods=['POST'])
+def generateQRCode():
+    nu = Nubank()
+    uuid, qr_code = nu.get_qr_code()
+    image = qr_code.make_image(fill_color="black", back_color="white")
+    image.save("static/image/qrcode.jpg");
+
+    return jsonify({"uuid": uuid});
 
 
 app.run(debug=True)

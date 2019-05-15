@@ -4,6 +4,7 @@
 pip install peewee
 pip install pyyaml
 pip install pandas
+pip install Pillow
 ```
 Copie o arquivo config.yml.dist para config.yml e troque as credenciais 
 Para executar a importação:
