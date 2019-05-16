@@ -13,6 +13,7 @@ $(document).ready(function () {
         var uuid = $("#qrCode").attr("uuid");
         $.post("/generateQRCode/"+uuid, function () {
             $("#qrCodeBox").hide();
+            location.reload(true);
         }).fail(function () {
             alert("Falha ao sincronizar");
         });

@@ -138,9 +138,9 @@ def generateQRCode():
     nu = Nubank()
     uuid, qr_code = nu.get_qr_code()
     image = qr_code.make_image(fill_color="black", back_color="white")
-    image.save("static/image/qrcode.jpg");
+    image.save("static/image/qrcode.jpg")
 
-    return jsonify({"uuid": uuid});
+    return jsonify({"uuid": uuid})
 
 
 @app.route("/generateQRCode/<uuid>", methods=['POST'])

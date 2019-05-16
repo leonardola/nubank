@@ -108,7 +108,6 @@ class Nubank:
         response = requests.post(self.proxy_list_app_url['lift'], json=payload, headers=self.headers)
 
         auth_data = self._handle_response(response)
-        print(auth_data)
         self.refresh_token = auth_data['access_token']
         self.headers['Authorization'] = f'Bearer {auth_data["access_token"]}'
         self.feed_url = auth_data['_links']['events']['href']
