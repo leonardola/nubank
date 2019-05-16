@@ -8,7 +8,11 @@ pip install Pillow
 ```
 Copie o arquivo config.yml.dist para config.yml e troque as credenciais 
 
-Para executar o servidor
+Crie o banco de dados no mysql chamado nubank 
+Importe o arquivo database/database.sql
+
+
+Executar o servidor
 
 ```python3.5 Index.py```
 
