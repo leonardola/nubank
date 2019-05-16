@@ -7,9 +7,6 @@ pip install pandas
 pip install Pillow
 ```
 Copie o arquivo config.yml.dist para config.yml e troque as credenciais 
-Para executar a importação:
-
-```python3.5 Importer.py```
 
 Para executar o servidor
 
@@ -18,3 +15,5 @@ Para executar o servidor
 Agora acesse 
 
 ```localhost:5000```
+Clique em iniciar sincronização, escaneie o qr code e clique em sincronizar. Depois é só recarregar a pagina
+
