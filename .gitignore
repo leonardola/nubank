@@ -4,3 +4,4 @@ __pycache__
 config.yml
 card_statements.json
 account_statements.json
+static/image/qrcode.jpg

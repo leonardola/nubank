@@ -9,6 +9,7 @@ from dateutil.relativedelta import relativedelta
 import pandas as pd
 from pynubank.nubank import Nubank
 from Importer import Importer
+import yaml
 
 app = Flask(__name__)
 
@@ -148,5 +149,7 @@ def sync(uuid):
     Importer(uuid)
     return "ok"
 
+with open('config.yml', 'r') as f:
+    doc = yaml.load(f)
 
-app.run(debug=True)
+app.run(debug=True, port=doc['port'])
