@@ -5,7 +5,17 @@ $(document).ready(function () {
         $("#qrCodeBox").show();
         $.post("/generateQRCode", function (data) {
             $("#qrCode").attr("src", "/static/image/qrcode.jpg");
+            $("#qrCode").attr("uuid", data.uuid);
         })
+    });
+
+    $("#qrCodeBox").click(function () {
+        var uuid = $("#qrCode").attr("uuid");
+        $.post("/generateQRCode/"+uuid, function () {
+            $("#qrCodeBox").hide();
+        }).fail(function () {
+            alert("Falha ao sincronizar");
+        });
     });
 
     $(document).click(function () {

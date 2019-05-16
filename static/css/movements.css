@@ -209,6 +209,8 @@ canvas {
     margin-left: 50%;
     transform: translate(-50%);
     margin-bottom: 20px;
+    background: #9531c5;
+    color: white;
 }
 
 .filter{

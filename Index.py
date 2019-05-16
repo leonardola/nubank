@@ -8,6 +8,7 @@ import datetime
 from dateutil.relativedelta import relativedelta
 import pandas as pd
 from pynubank.nubank import Nubank
+from Importer import Importer
 
 app = Flask(__name__)
 
@@ -36,31 +37,42 @@ def list(year, month):
         year = str(now.year)
         month = str(now.month)
 
-    movements = Movement.select().where(
-        Movement.date.between(year + '-' + month + '-01', year + '-' + month + '-31')).order_by(Movement.date.asc())
+    try:
+        movements = Movement.select().where(
+            Movement.date.between(year + '-' + month + '-01', year + '-' + month + '-31')).order_by(Movement.date.asc())
 
-    months = getMonthsList()
+        months = getMonthsList()
 
-    total = 0
-    totalIncome = 0
-    totalOutcome = 0
-    for movement in movements:
-        if movement.status == 'SHOW':
-            if movement.type == 'OUTCOME':
-                total = total - movement.value
-                totalOutcome = totalOutcome + movement.value
-            else:
-                total = total + movement.value
-                totalIncome = totalIncome + movement.value
+        total = 0
+        totalIncome = 0
+        totalOutcome = 0
+        for movement in movements:
+            if movement.status == 'SHOW':
+                if movement.type == 'OUTCOME':
+                    total = total - movement.value
+                    totalOutcome = totalOutcome + movement.value
+                else:
+                    total = total + movement.value
+                    totalIncome = totalIncome + movement.value
 
-    return render_template(
-        'movements.jinja2',
-        movements=movements,
-        total=total,
-        months=months,
-        totalIncome=totalIncome,
-        totalOutcome=totalOutcome
-    )
+        return render_template(
+            'movements.jinja2',
+            movements=movements,
+            total=total,
+            months=months,
+            totalIncome=totalIncome,
+            totalOutcome=totalOutcome
+        )
+
+    except:
+        return render_template(
+            'movements.jinja2',
+            movements=[],
+            total=0,
+            months=[],
+            totalIncome=0,
+            totalOutcome=0
+        )
 
 
 def getMonthsList():
@@ -129,6 +141,12 @@ def generateQRCode():
     image.save("static/image/qrcode.jpg");
 
     return jsonify({"uuid": uuid});
+
+
+@app.route("/generateQRCode/<uuid>", methods=['POST'])
+def sync(uuid):
+    Importer(uuid)
+    return "ok"
 
 
 app.run(debug=True)
