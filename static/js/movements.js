@@ -26,39 +26,6 @@ $(document).ready(function () {
         $.post("/changeMovementName/" + $(this).attr("movement_id"), data)
     });
 
-    var ctx = document.getElementById('myChart').getContext('2d');
-    var income = $("#myChart").attr('income');
-    var outcome = $("#myChart").attr('outcome');
-    var myChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Entrou', 'Saiu'],
-            datasets: [{
-                label: 'Gastos',
-                data: [income, outcome],
-                backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            maintainAspectRatio: false,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
-            }
-        }
-    });
-
     $(".filter").on("keyup", function () {
         var value = $(this).val().toLowerCase();
         $(".movementsList tr").filter(function () {
@@ -69,7 +36,4 @@ $(document).ready(function () {
 
         });
     });
-
-
-
 });

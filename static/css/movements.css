@@ -96,6 +96,7 @@ td:nth-child(1) {
 
 canvas {
     background: white;
+    height: 200px;
 }
 
 #addTagBox {

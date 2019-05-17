@@ -108,7 +108,6 @@ def addCategory(movement_id):
 def getMovmentTags(movement_id):
     tags = Category.select().join(Movement_has_Category).join(Movement).where(Movement.id == movement_id)
 
-    # tags = Category.select().where(Movement.id==movement_id).execute()
     tags_list = []
     for tag in tags:
         tags_list.append({"id": tag.id, "name": tag.name})
@@ -148,6 +147,24 @@ def generateQRCode():
 def sync(uuid):
     Importer(uuid)
     return "ok"
+
+
+@app.route("/getMovementsByTags")
+def getMovementsByTags():
+    tags = Category.select().execute()
+    data = {}
+    for tag in tags:
+        movements = Movement.select().join(Movement_has_Category).join(Category).where(Category.id == tag.id)
+        sum = 0
+        for movement in movements:
+            if movement.type == "OUTCOME":
+                sum = sum + movement.value
+
+        if sum:
+            data[tag.name] = str(sum)
+
+    return jsonify(data)
+
 
 with open('config.yml', 'r') as f:
     doc = yaml.load(f)
