@@ -85,11 +85,13 @@
                 </tr>
 
             </table>
-            <div>
-                <canvas id="inNOut" height="200" income="{{ totalIncome }}" outcome="{{ totalOutcome }}"></canvas>
-            </div>
-            <div>
-                <canvas id="outs" height="200" income="{{ totalIncome }}" outcome="{{ totalOutcome }}"></canvas>
+            <div id="charts">
+                <div class="chart">
+                    <canvas id="inNOut" height="200" width="200" income="{{ totalIncome }}" outcome="{{ totalOutcome }}"></canvas>
+                </div>
+                <div class="chart">
+                    <canvas id="outs" height="200" width="200" income="{{ totalIncome }}" outcome="{{ totalOutcome }}"></canvas>
+                </div>
             </div>
         </div>
 

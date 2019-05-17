@@ -222,3 +222,16 @@ canvas {
 label{
     color: white;
 }
+
+.chart{
+    width: 49.8%;
+    height: 250px;
+    float: left;
+}
+
+#charts{
+    background: white;
+    margin-bottom: 50px;
+    height: 275px;
+    margin-top: 50px;
+}

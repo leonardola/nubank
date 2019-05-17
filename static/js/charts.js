@@ -3,31 +3,23 @@ $(document).ready(function () {
     var income = $("#inNOut").attr('income');
     var outcome = $("#inNOut").attr('outcome');
     new Chart(ctx, {
-        type: 'bar',
+        type: 'doughnut',
         data: {
             labels: ['Entrou', 'Saiu'],
             datasets: [{
                 label: 'Gastos',
                 data: [income, outcome],
                 backgroundColor: [
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 99, 132, 0.2)',
-                ],
-                borderColor: [
                     'rgba(54, 162, 235, 1)',
-                    'rgba(255, 99, 132, 1)'
-                ],
-                borderWidth: 1
+                    'rgba(255, 99, 132, 1)',
+                ]
             }]
         },
         options: {
             maintainAspectRatio: false,
-            scales: {
-                yAxes: [{
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }]
+            title: {
+                display: true,
+                text: 'Balanço'
             }
         }
     });
@@ -36,14 +28,24 @@ $(document).ready(function () {
 
         var tags = [];
         var values = [];
+        var color = [];
 
+        var generateDynamicColor = function () {
+            var r = Math.floor(Math.random() * 255);
+            var g = Math.floor(Math.random() * 255);
+            var b = Math.floor(Math.random() * 255);
+            return "rgb(" + r + "," + g + "," + b + ")";
+
+        };
         for (var i in data) {
             if (!data.hasOwnProperty(i)) {
                 continue;
-            }
 
+            }
             tags.push(i);
             values.push(data[i]);
+            color.push(generateDynamicColor());
+
         }
 
         var ctx = document.getElementById('outs').getContext('2d');
@@ -54,30 +56,17 @@ $(document).ready(function () {
             data: {
                 labels: tags,
                 datasets: [{
-                    label: 'Gastos',
                     data: values,
-                    backgroundColor: [
-                        'rgba(54, 162, 235, 0.2)',
-                        'rgba(255, 99, 132, 0.2)',
-                    ],
-                    borderColor: [
-                        'rgba(54, 162, 235, 1)',
-                        'rgba(255, 99, 132, 1)'
-                    ],
-                    borderWidth: 1
+                    backgroundColor: color
                 }]
             },
             options: {
                 maintainAspectRatio: false,
-                scales: {
-                    yAxes: [{
-                        ticks: {
-                            beginAtZero: true
-                        }
-                    }]
+                title: {
+                    display: true,
+                    text: 'Tags'
                 }
             }
         })
     });
-
 });
