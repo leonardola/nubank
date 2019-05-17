@@ -24,7 +24,10 @@ $(document).ready(function () {
         }
     });
 
-    $.get("/getMovementsByTags", function (data) {
+    var month = $("meta").attr("month");
+    var year = $("meta").attr("year");
+
+    $.get("/getMovementsByTags/" + year + "/" + month, function (data) {
 
         var tags = [];
         var values = [];

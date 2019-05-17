@@ -62,7 +62,9 @@ def list(year, month):
             total=total,
             months=months,
             totalIncome=totalIncome,
-            totalOutcome=totalOutcome
+            totalOutcome=totalOutcome,
+            year=year,
+            month=month
         )
 
     except:
@@ -149,12 +151,16 @@ def sync(uuid):
     return "ok"
 
 
-@app.route("/getMovementsByTags")
-def getMovementsByTags():
+@app.route("/getMovementsByTags/<year>/<month>")
+def getMovementsByTags(year, month):
     tags = Category.select().execute()
     data = {}
     for tag in tags:
-        movements = Movement.select().join(Movement_has_Category).join(Category).where(Category.id == tag.id)
+        movements = Movement.select().join(Movement_has_Category).join(Category).where(
+            (Category.id == tag.id) & (Movement.date.between(year + '-' + month + '-01', year + '-' + month + '-31'))
+        )
+
+        print(movements)
         sum = 0
         for movement in movements:
             if movement.type == "OUTCOME":
