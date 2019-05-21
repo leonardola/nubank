@@ -13,6 +13,19 @@ import yaml
 
 app = Flask(__name__)
 
+@app.route("/addMovement", methods=['POST'])
+def addMovement():
+    movement = Movement.create(
+        date=request.form['date'],
+        original_name=request.form['name'],
+        value=request.form['value'],
+        type=request.form['type'],
+        status='SHOW'
+    )
+    movement.save()
+
+    return "ok"
+
 
 @app.route("/removeMovement/<movement_id>", methods=['POST'])
 def removeMovement(movement_id):

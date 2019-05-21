@@ -31,6 +31,7 @@
             </div>
             <label>Filtro</label>
             <input class="filter">
+            <button id="addMovement">Adicionar Movimentação</button>
             <table cellspacing="0" cellpadding="0" class="movementsList">
                 <tr>
                     <th></th>
@@ -106,6 +107,27 @@
 
             </div>
 
+        </div>
+
+        <div id="addMovementBox" hidden>
+            <div>
+                <label>Data</label>
+                <label>Nome</label>
+                <label>Valor</label>
+                <label>Tipo</label>
+            </div>
+            <div>
+                <input type="date">
+                <input for="name">
+                <input for="value">
+                <select>
+                    <option value="INCOME">Entrada</option>
+                    <option value="OUTCOME">Saída</option>
+                </select>
+            </div>
+            <div>
+                <button>Salvar</button>
+            </div>
         </div>
     </body>
 </html>
