@@ -138,6 +138,7 @@ def getTags():
     for tag in tags:
         tags_list.append(tag.name)
 
+    tags_list = sorted(tags_list, 'value')
     return jsonify(tags_list)
 
 
