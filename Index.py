@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, redirect
 from flask import render_template
 from Entity.Movement import Movement
 from Entity.Category import Category
@@ -13,8 +13,8 @@ import yaml
 
 app = Flask(__name__)
 
-@app.route("/addMovement", methods=['POST'])
-def addMovement():
+@app.route("/addMovement/<year>/<month>", methods=['POST'])
+def addMovement(year, month):
     movement = Movement.create(
         date=request.form['date'],
         original_name=request.form['name'],
@@ -24,7 +24,9 @@ def addMovement():
     )
     movement.save()
 
-    return "ok"
+    return redirect("/"+year+"/"+month)
+
+
 
 
 @app.route("/removeMovement/<movement_id>", methods=['POST'])

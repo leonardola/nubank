@@ -110,24 +110,26 @@
         </div>
 
         <div id="addMovementBox" hidden>
-            <div>
-                <label>Data</label>
-                <label>Nome</label>
-                <label>Valor</label>
-                <label>Tipo</label>
-            </div>
-            <div>
-                <input type="date">
-                <input for="name">
-                <input for="value">
-                <select>
-                    <option value="INCOME">Entrada</option>
-                    <option value="OUTCOME">Saída</option>
-                </select>
-            </div>
-            <div>
-                <button>Salvar</button>
-            </div>
+            <form action="/addMovement/{{ year }}/{{ month }}" method="post">
+                <div>
+                    <label>Data</label>
+                    <label>Nome</label>
+                    <label>Valor</label>
+                    <label>Tipo</label>
+                </div>
+                <div>
+                    <input name="date" type="date">
+                    <input name="name">
+                    <input name="value">
+                    <select name="type">
+                        <option value="INCOME">Entrada</option>
+                        <option value="OUTCOME">Saída</option>
+                    </select>
+                </div>
+                <div>
+                    <button>Salvar</button>
+                </div>
+            </form>
         </div>
     </body>
 </html>

@@ -49,21 +49,4 @@ $(document).ready(function () {
     $(document).click(function () {
         $("#addMovementBox").hide();
     })
-
-    $("#addMovementBox button").click(function () {
-        var data = {
-            date: $("#addMovementBox input[type='date']").val(),
-            name: $("#addMovementBox input[for='name']").val(),
-            value: $("#addMovementBox input[for='value']").val(),
-            type: $("#addMovementBox select").val(),
-        };
-
-        $.post("/addMovement", data, function () {
-            $("#addMovementBox").hide();
-            $("#addMovementBox input").val("");
-        }).fail(function () {
-            alert("Erro ao salvar movimento");
-        });
-
-    })
 });
