@@ -25,12 +25,11 @@
         <div class="contentWrapper">
             <button id="generateQrCode">Iniciar Sincronização</button>
             <div class="monthsWrapper">
-                {% for month in months %}
+                {% for month in months[::-1] %}
                     <a href="/{{ month.split("$")[1] }}"><button class="monthButton">{{ month.split("$")[0] }}</button></a>
                 {% endfor %}
             </div>
-            <label>Filtro</label>
-            <input class="filter">
+            <input class="filter" placeholder="Filtro">
             <button id="addMovement">Adicionar Movimentação</button>
             <table cellspacing="0" cellpadding="0" class="movementsList">
                 <tr>
