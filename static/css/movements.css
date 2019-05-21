@@ -41,6 +41,10 @@ tr {
     border: none;
 }
 
+.monthButton.selected{
+    border: 1px solid;
+}
+
 .monthsWrapper {
     display: flex;
     justify-content: space-evenly;

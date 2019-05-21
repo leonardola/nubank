@@ -25,8 +25,12 @@
         <div class="contentWrapper">
             <button id="generateQrCode">Iniciar Sincronização</button>
             <div class="monthsWrapper">
-                {% for month in months[::-1] %}
-                    <a href="/{{ month.split("$")[1] }}"><button class="monthButton">{{ month.split("$")[0] }}</button></a>
+                {% for monthOption in months[::-1] %}
+                    {% if monthOption.split("$")[1] == year+"/"+month %}
+                        <a href="/{{ monthOption.split("$")[1] }}"><button class="monthButton selected">{{ monthOption.split("$")[0] }}</button></a>
+                    {% else %}
+                        <a href="/{{ monthOption.split("$")[1] }}"><button class="monthButton">{{ monthOption.split("$")[0] }}</button></a>
+                    {% endif %}
                 {% endfor %}
             </div>
             <input class="filter" placeholder="Filtro">

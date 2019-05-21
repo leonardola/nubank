@@ -13,6 +13,7 @@ import yaml
 
 app = Flask(__name__)
 
+
 @app.route("/addMovement/<year>/<month>", methods=['POST'])
 def addMovement(year, month):
     movement = Movement.create(
@@ -24,9 +25,7 @@ def addMovement(year, month):
     )
     movement.save()
 
-    return redirect("/"+year+"/"+month)
-
-
+    return redirect("/" + year + "/" + month)
 
 
 @app.route("/removeMovement/<movement_id>", methods=['POST'])
