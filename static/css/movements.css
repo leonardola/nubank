@@ -56,6 +56,10 @@ tr {
     margin-right: 30%;
 }
 
+.nameTd{
+    width: 50%;
+}
+
 .slick-slider .slick-list {
     height: 82px;
 }
@@ -77,12 +81,18 @@ tr {
 }
 
 .nameInput {
+    font-weight: 600;
+    margin-top: 10px;
+    margin-bottom: 10px;
     background: none;
     border: none;
     color: white;
     font-family: 'Roboto', sans-serif;
     font-size: 0.8em;
     width: 100%;
+    border: 1px solid;
+    padding: 5px;
+    border-radius: 3px;
 }
 
 .fas.fa-caret-down {
@@ -290,4 +300,10 @@ label {
     width: 130px;
     height: 32px;
     margin-top: 10px;
+}
+
+.movementTags{
+    font-weight: 100;
+    font-size: 0.8em;
+    text-align: left;
 }

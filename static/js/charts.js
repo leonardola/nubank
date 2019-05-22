@@ -16,11 +16,15 @@ $(document).ready(function () {
             }]
         },
         options: {
+            legend: {
+                display: false
+            },
             maintainAspectRatio: false,
             title: {
                 display: true,
                 text: 'Balanço'
-            }
+            },
+
         }
     });
 
@@ -45,8 +49,8 @@ $(document).ready(function () {
                 continue;
 
             }
-            tags.push(i);
-            values.push(data[i]);
+            tags.push(data[i]['name']);
+            values.push(data[i]['value']);
             color.push(generateDynamicColor());
 
         }
@@ -64,6 +68,9 @@ $(document).ready(function () {
                 }]
             },
             options: {
+                legend: {
+                    display: false
+                },
                 maintainAspectRatio: false,
                 title: {
                     display: true,

@@ -57,12 +57,22 @@
                             <td>
                                 <p>{{ movement.date }}</p>
                             </td>
-                            <td>
+                            <td class="nameTd">
                                 {% if movement.edited_name %}
                                     <input class="nameInput" movement_id="{{ movement.id }}" value="{{ movement.edited_name }}"/>
                                 {% else %}
                                     <input class="nameInput" movement_id="{{ movement.id }}" value="{{ movement.original_name }}"/>
                                 {% endif %}
+                                <div class="movementTags">
+
+                                    {% for tag in movement.tags %}
+                                        {{ tag.name }}
+                                        {% if not loop.last %}
+                                            ,
+                                        {% endif %}
+                                    {% endfor %}
+                                </div>
+
                             </td>
                             <td>
                                 {% if movement.type == 'OUTCOME' %}

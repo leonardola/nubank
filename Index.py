@@ -63,6 +63,8 @@ def list(year, month):
         totalOutcome = 0
         for movement in movements:
             if movement.status == 'SHOW':
+                movement.tags = Category.select().join(Movement_has_Category).join(Movement).where(
+                    Movement.id == movement.id)
                 if movement.type == 'OUTCOME':
                     total = total - movement.value
                     totalOutcome = totalOutcome + movement.value
@@ -168,7 +170,7 @@ def sync(uuid):
 @app.route("/getMovementsByTags/<year>/<month>")
 def getMovementsByTags(year, month):
     tags = Category.select().execute()
-    data = {}
+    data = []
     for tag in tags:
         movements = Movement.select().join(Movement_has_Category).join(Category).where(
             (Category.id == tag.id) & (Movement.date.between(year + '-' + month + '-01', year + '-' + month + '-31'))
@@ -180,7 +182,12 @@ def getMovementsByTags(year, month):
                 sum = sum + movement.value
 
         if sum:
-            data[tag.name] = str(sum)
+            data.append({'name': tag.name, 'value': sum})
+
+    data = sorted(data, key=lambda k: k['value'])
+
+    for item in data:
+        item['value'] = str(item['value'])
 
     return jsonify(data)
 
