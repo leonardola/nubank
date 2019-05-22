@@ -138,7 +138,6 @@ def getTags():
     for tag in tags:
         tags_list.append(tag.name)
 
-    tags_list = sorted(tags_list, 'value')
     return jsonify(tags_list)
 
 
@@ -175,7 +174,6 @@ def getMovementsByTags(year, month):
             (Category.id == tag.id) & (Movement.date.between(year + '-' + month + '-01', year + '-' + month + '-31'))
         )
 
-        print(movements)
         sum = 0
         for movement in movements:
             if movement.type == "OUTCOME":
